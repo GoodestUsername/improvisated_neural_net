@@ -8,9 +8,9 @@ from app.classes.network import Network
 from app.classes.neuron import Neuron
 import matplotlib.pyplot as plt
 
-from app.utils.normalizers import normalize_layer_weights, normalize_input
+from app.utils.normalizers import normalize_input
 
-possible_outputs = ['0', '1', "2", "3", "4", "5", "6", "7", "8", "9"]
+possible_outputs = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
 def plot(x, y):
@@ -18,21 +18,21 @@ def plot(x, y):
     plt.plot(x, y)
 
     # Add labels and title
-    plt.xlabel('X-')
-    plt.ylabel('Y-SUM')
-    plt.title('SUM')
+    plt.xlabel("X-")
+    plt.ylabel("Y-SUM")
+    plt.title("SUM")
 
     # Show the plot
 
 
 def load_nn():
-    with open('state.pkl', 'rb') as f:
+    with open("state.pkl", "rb") as f:
         neural_network = pickle.load(f)
     return neural_network
 
 
 def save_nn(neural_network):
-    with open('state.pkl', 'wb') as f:
+    with open("state.pkl", "wb") as f:
         pickle.dump(neural_network, f)
 
 
@@ -53,7 +53,7 @@ def train(neural_network, images, labels):
 
 
 def main():
-    mndata = MNIST('samples')
+    mndata = MNIST("samples")
 
     images, labels = mndata.load_training()
     neural_network = load_nn()
@@ -61,7 +61,7 @@ def main():
         print(mndata.display(images[i]))
         print("should be: " + str(labels[i]))
         neural_network.try_image(normalize_input(images[i]), labels[i])
-        print('no work')
+        print("no work")
 
     # new nn section
     # neural_network = Network(784, normalize_input(images[0]), labels[0], possible_outputs)
@@ -87,12 +87,10 @@ def main():
 
     # print('yay skynet')
 
-
-
     # index = random.randrange(0, len(images))  # choose an index ;-)
     # print(labels[index])
     # print("hello world")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
