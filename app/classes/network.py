@@ -118,23 +118,23 @@ class Network:
                 desired = 0
             dc_da = (
                 value.activation - desired
-            )  # Derivative of the cost with respect to activation
+            )  # deriv of the cost with respect to activation
             da_dz = value.activation - math.pow(
                 value.activation, 2
-            )  # Derivative of act with respect to weighted sum
-            # dz_dw = value.calculate_parent_sum_weight()  # Derivative of weighted sum with respect to weights
+            )  # deriv of act with respect to weighted sum
+            # dz_dw = value.calculate_parent_sum_weight()  # deriv of weighted sum with respect to weights
             chain = dc_da * da_dz
             self.neuronChainMap.append(chain)
             for ni, neuron in enumerate(value.parents):
                 da_dw = neuron[0].activation
-                correction = dc_da * da_dw  # Derivative of cost with respect to weight
+                correction = dc_da * da_dw  # deriv of cost with respect to weight
                 neuron[1] -= 0.01 * correction
 
     def process_hidden_layer(self):
         for neuron in self.hidden_layer:
             da_dz = neuron.activation * (
                 1 - neuron.activation
-            )  # Derivative of activation with respect to weighted sum
+            )  # deriv of activation with respect to weighted sum
             delta = (
                 sum(
                     [
